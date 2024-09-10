@@ -5,7 +5,7 @@ import reset from "styled-reset";
 
 import Layout from "./components/layout";
 import ProtectedRoute from "./components/protected-route/protected-route";
-import LoadingScreen from "./components/loading-screen";
+import LoadingScreen from "./components/loading-screen/loading-screen";
 
 import Home from "./routes/home";
 import Profile from "./routes/profile";
