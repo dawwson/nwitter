@@ -65,13 +65,29 @@ export const Footer = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 10px;
+
+  & > button {
+    margin: 0 30px;
+  }
 `;
 
-export const Button = styled.button<{ type: "error" | "success" }>`
-  background-color: ${({ type, theme }) =>
-    type === "error" ? theme.colors.light_red : theme.colors.light_blue};
+export const Button = styled.button<{
+  type: "error" | "success";
+  $location: "left" | "right" | "center";
+}>`
+  background-color: ${({ type, $location, theme }) => {
+    if ($location === "left") {
+      return theme.colors.extra_light_gray;
+    }
+    if (type === "error") {
+      return theme.colors.light_red;
+    } else {
+      return theme.colors.light_blue;
+    }
+  }};
   border: none;
-  color: white;
+  color: ${({ $location, theme }) =>
+    $location === "left" ? theme.colors.black : "#FFFFFF"};
   padding: 8px 16px;
   border-radius: 20px;
   cursor: pointer;
