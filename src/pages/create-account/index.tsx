@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 
+import * as S from "./style";
 import Modal from "../../components/modal";
 import { auth } from "../../configs/firebase";
 import { firebaseError } from "../../configs/error-code";
@@ -61,10 +61,10 @@ export default function CreateAccount() {
   };
 
   return (
-    <Wrapper>
-      <Title>Join 𝕏</Title>
-      <Form onSubmit={handleOnSubmit}>
-        <Input
+    <S.Wrapper>
+      <S.Title>Join 𝕏</S.Title>
+      <S.Form onSubmit={handleOnSubmit}>
+        <S.Input
           name="name"
           value={name}
           placeholder="Name"
@@ -72,7 +72,7 @@ export default function CreateAccount() {
           onChange={handleOnChange}
           required
         />
-        <Input
+        <S.Input
           name="email"
           value={email}
           placeholder="Email"
@@ -80,7 +80,7 @@ export default function CreateAccount() {
           onChange={handleOnChange}
           required
         />
-        <Input
+        <S.Input
           name="password"
           value={password}
           placeholder="Password"
@@ -88,48 +88,13 @@ export default function CreateAccount() {
           onChange={handleOnChange}
           required
         />
-        <Input type="submit" value="Create Account" />
-      </Form>
+        <S.Input type="submit" value="Create Account" />
+      </S.Form>
       {isOpen && (
         <Modal type="error" title="Error" onClick={() => setIsOpen(false)}>
           <p>{error}</p>
         </Modal>
       )}
-    </Wrapper>
+    </S.Wrapper>
   );
 }
-
-const Wrapper = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 420px;
-  padding: 50px 0px;
-`;
-
-const Title = styled.h1`
-  font-size: 42px;
-`;
-
-const Form = styled.form`
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-`;
-
-const Input = styled.input`
-  padding: 10px 20px;
-  border-radius: 50px;
-  border: none;
-  width: 100%;
-  font-size: 16px;
-  &[type="submit"] {
-    cursor: pointer;
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-`;
