@@ -27,7 +27,7 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: white;
   width: 350px;
   max-width: 90%;
   border-radius: 15px;
