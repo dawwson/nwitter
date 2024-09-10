@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
 import * as S from "./style";
 
-interface ModalProps {
+interface Props {
   type: "error" | "success";
   title: string;
   children: ReactNode;
   onClick: () => void;
 }
 
-const Modal = ({ type, title, children, onClick }: ModalProps) => {
+const Modal = ({ type, title, children, onClick }: Props) => {
   return (
     <S.ModalOverlay>
       <S.ModalContainer>

@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 
-import Modal from "../components/modal/modal";
-import { auth } from "../configs/firebase";
-import { firebaseError } from "../configs/error-code";
+import Modal from "../../components/modal";
+import { auth } from "../../configs/firebase";
+import { firebaseError } from "../../configs/error-code";
 
 export default function CreateAccount() {
   const navigate = useNavigate();

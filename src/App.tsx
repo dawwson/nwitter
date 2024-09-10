@@ -4,10 +4,10 @@ import styled, { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import Layout from "./components/layout";
-import ProtectedRoute from "./components/protected-route/protected-route";
-import LoadingScreen from "./components/loading-screen/loading-screen";
+import ProtectedRoute from "./components/protected-route";
+import LoadingScreen from "./components/loading-screen";
 
-import Home from "./routes/home";
+import Home from "./routes/home/home";
 import Profile from "./routes/profile";
 import Login from "./routes/login";
 import CreateAccount from "./routes/create-account";
