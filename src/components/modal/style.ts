@@ -27,7 +27,7 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   width: 350px;
   max-width: 90%;
   border-radius: 15px;
@@ -49,14 +49,15 @@ export const Title = styled.h2<{ type: "error" | "success" }>`
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
-  color: ${({ type }) => (type === "error" ? "#e74c3c" : "#1da1f2")};
+  color: ${({ type, theme }) =>
+    type === "error" ? theme.colors.light_red : theme.colors.light_blue};
   text-align: center;
 `;
 
 export const Content = styled.div`
   padding: 40px 20px;
   font-size: 1rem;
-  color: #14171a;
+  color: ${({ theme }) => theme.colors.black};
   text-align: center;
 `;
 
@@ -67,7 +68,8 @@ export const Footer = styled.div`
 `;
 
 export const Button = styled.button<{ type: "error" | "success" }>`
-  background-color: ${({ type }) => (type === "error" ? "#e74c3c" : "#1da1f2")};
+  background-color: ${({ type, theme }) =>
+    type === "error" ? theme.colors.light_red : theme.colors.light_blue};
   border: none;
   color: white;
   padding: 8px 16px;
@@ -76,7 +78,7 @@ export const Button = styled.button<{ type: "error" | "success" }>`
   font-size: 1rem;
 
   &:hover {
-    background-color: ${({ type }) =>
-      type === "error" ? "#c0392b" : "#1a91da"};
+    background-color: ${({ type, theme }) =>
+      type === "error" ? theme.colors.dark_red : theme.colors.dark_blue};
   }
 `;
