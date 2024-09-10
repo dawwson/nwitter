@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import reset from "styled-reset";
 
 import Layout from "./components/layout";
@@ -13,6 +13,7 @@ import Login from "./pages/login";
 import CreateAccount from "./pages/create-account";
 
 import { auth } from "./configs/firebase";
+import { theme } from "./configs/theme";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,10 +28,12 @@ function App() {
   }, []);
 
   return (
-    <Wrapper>
-      <GlobalStyles />
-      {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
-    </Wrapper>
+    <ThemeProvider theme={theme}>
+      <Wrapper>
+        <GlobalStyles />
+        {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
+      </Wrapper>
+    </ThemeProvider>
   );
 }
 
