@@ -10,7 +10,6 @@ export const theme = {
     light_gray: "#AAB8C2",
     extra_light_gray: "E1E8ED",
     extra_extra_light_gray: "F5F8FA",
-    white: "#FFFFFF",
 
     // error, danger
     dark_red: "#C0392B",
