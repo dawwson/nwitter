@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import Layout from "./components/layout";
+import ProtectedRoute from "./components/protected-route/protected-route";
+import LoadingScreen from "./components/loading-screen";
+
 import Home from "./routes/home";
 import Profile from "./routes/profile";
 import Login from "./routes/login";
 import CreateAccount from "./routes/create-account";
-import LoadingScreen from "./components/loading-screen";
-import { auth } from "./firebase";
+
+import { auth } from "./configs/firebase";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,17 +27,21 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Wrapper>
       <GlobalStyles />
       {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
-    </>
+    </Wrapper>
   );
 }
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "",
@@ -46,7 +53,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // Layout으로 감싸지 않는 경로
+  // 로그인 필요 없는 경로
   {
     path: "/login",
     element: <Login />,
@@ -67,6 +74,12 @@ const GlobalStyles = createGlobalStyle`
     color: white;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
+`;
+
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
 `;
 
 export default App;
