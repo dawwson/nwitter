@@ -28,6 +28,9 @@ export const Input = styled.input`
   width: 100%;
   font-size: 16px;
   &[type="submit"] {
+    background-color: ${({ theme }) => theme.colors.light_blue};
+    color: white;
+    font-weight: 600;
     cursor: pointer;
     &:hover {
       opacity: 0.8;

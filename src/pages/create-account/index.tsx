@@ -5,6 +5,7 @@ import { FirebaseError } from "firebase/app";
 
 import * as S from "./style";
 import Modal from "../../components/modal";
+import GithubButton from "../../components/github-button";
 import { auth } from "../../configs/firebase";
 import { firebaseError } from "../../configs/error-code";
 
@@ -96,6 +97,7 @@ export default function CreateAccount() {
       <S.Switcher>
         Already have an account? <Link to="/login">Login &rarr;</Link>
       </S.Switcher>
+      <GithubButton />
       {isOpen && (
         <Modal type="error" title="Error" onClick={() => setIsOpen(false)}>
           <p>{error}</p>

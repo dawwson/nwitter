@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import * as S from "./style";
 import Modal from "../../components/modal";
+import GithubButton from "../../components/github-button";
 import { auth } from "../../configs/firebase";
 import { firebaseError } from "../../configs/error-code";
-import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -73,6 +74,7 @@ const Login = () => {
         Don't have an account?{" "}
         <Link to="/create-account">Create one &rarr;</Link>
       </S.Switcher>
+      <GithubButton />
       {isOpen && (
         <Modal type="error" title="Error" onClick={() => setIsOpen(false)}>
           <p>{error}</p>
