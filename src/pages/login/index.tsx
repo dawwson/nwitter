@@ -76,7 +76,17 @@ const Login = () => {
       </S.Switcher>
       <GithubButton />
       {isOpen && (
-        <Modal type="error" title="Error" onClick={() => setIsOpen(false)}>
+        <Modal
+          type="error"
+          title="Error"
+          buttons={[
+            {
+              name: "Close",
+              location: "center",
+              onClick: () => setIsOpen(false),
+            },
+          ]}
+        >
           <p>{error}</p>
         </Modal>
       )}
