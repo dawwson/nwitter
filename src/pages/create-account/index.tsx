@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 
@@ -88,8 +88,14 @@ export default function CreateAccount() {
           onChange={handleOnChange}
           required
         />
-        <S.Input type="submit" value="Create Account" />
+        <S.Input
+          type="submit"
+          value={isLoading ? "Loading..." : "Create account"}
+        />
       </S.Form>
+      <S.Switcher>
+        Already have an account? <Link to="/login">Login &rarr;</Link>
+      </S.Switcher>
       {isOpen && (
         <Modal type="error" title="Error" onClick={() => setIsOpen(false)}>
           <p>{error}</p>
