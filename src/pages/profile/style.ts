@@ -34,3 +34,10 @@ export const AvatarInput = styled.input`
 export const Name = styled.span`
   font-size: 22px;
 `;
+
+export const Tweets = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+`;

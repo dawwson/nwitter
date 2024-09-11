@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 
 import * as S from "./style";
-import { auth, storage } from "../../configs/firebase";
+import { auth, db, storage } from "../../configs/firebase";
+import {
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
+import { TweetDocument } from "../../components/timeline";
+import Tweet from "../../components/tweet";
 
 const Profile = () => {
   const user = auth.currentUser;
   const [avatar, setAvatar] = useState(user?.photoURL);
+  const [tweets, setTweets] = useState<TweetDocument[]>([]);
 
   const handleOnChangeAvatar = async (
     e: React.ChangeEvent<HTMLInputElement>
@@ -30,6 +41,33 @@ const Profile = () => {
       setAvatar(avatarUrl);
     }
   };
+
+  useEffect(() => {
+    const fetchTweets = async () => {
+      const tweetQuery = query(
+        collection(db, "tweets"),
+        where("userId", "==", user?.uid),
+        orderBy("createdAt", "desc"),
+        limit(25)
+      );
+
+      const snapshot = await getDocs(tweetQuery);
+      const tweetDocuments: TweetDocument[] = snapshot.docs.map((doc) => {
+        const { tweet, userId, username, downloadUrl, createdAt } = doc.data();
+        return {
+          id: doc.id,
+          tweet,
+          userId,
+          username,
+          downloadUrl,
+          createdAt,
+        };
+      });
+      setTweets(tweetDocuments);
+    };
+
+    fetchTweets();
+  }, [user?.uid]);
 
   return (
     <S.Wrapper>
@@ -60,6 +98,11 @@ const Profile = () => {
         onChange={handleOnChangeAvatar}
       />
       <S.Name>{user?.displayName ?? "Anonymous"}</S.Name>
+      <S.Tweets>
+        {tweets.map((tweet) => (
+          <Tweet key={tweet.id} {...tweet} />
+        ))}
+      </S.Tweets>
     </S.Wrapper>
   );
 };
