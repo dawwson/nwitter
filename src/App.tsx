@@ -7,7 +7,7 @@ import Layout from "./components/layout";
 import ProtectedRoute from "./components/protected-route";
 import LoadingScreen from "./components/loading-screen";
 
-import Home from "./pages/home/home";
+import Home from "./pages/home";
 import Profile from "./pages/profile";
 import Login from "./pages/login";
 import CreateAccount from "./pages/create-account";
