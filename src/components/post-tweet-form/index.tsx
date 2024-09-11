@@ -56,8 +56,16 @@ const PostTweetForm = () => {
     }
   };
 
+  const handleOnKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    // MAC: Command + Enter
+    // Windows: Ctrl + Enter
+    if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+      handleOnSubmit(e as React.KeyboardEvent<HTMLFormElement>);
+    }
+  };
+
   return (
-    <S.Form onSubmit={handleOnSubmit}>
+    <S.Form onSubmit={handleOnSubmit} onKeyDown={handleOnKeyDown}>
       <S.TextArea
         rows={5}
         maxLength={180}
