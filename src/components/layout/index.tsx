@@ -67,12 +67,12 @@ export default function Layout() {
           title="Log out"
           buttons={[
             {
-              name: "No",
+              name: "Cancel",
               location: "left",
               onClick: () => setIsOpen(false),
             },
             {
-              name: "OK",
+              name: "Log out",
               location: "right",
               onClick: handleOnClickModalRight,
             },
