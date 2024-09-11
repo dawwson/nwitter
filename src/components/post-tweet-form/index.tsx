@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 import * as S from "./style";
-import { auth, db } from "../../configs/firebase";
+import { auth, db, storage } from "../../configs/firebase";
 
 const PostTweetForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,18 +27,29 @@ const PostTweetForm = () => {
 
     const user = auth.currentUser;
 
-    if (!user || isLoading || tweet === "" || tweet.length > 180) {
+    if (!user || isLoading || tweet.length > 180) {
       return;
     }
 
     try {
       setIsLoading(true);
-      await addDoc(collection(db, "tweets"), {
+
+      const docRef = await addDoc(collection(db, "tweets"), {
         tweet,
         username: user.displayName || "Anonymous",
         userId: user.uid,
         createdAt: Date.now(),
       });
+
+      if (file) {
+        const locationRef = ref(
+          storage,
+          `tweets/${user.uid}-${user.displayName}/${docRef.id}`
+        );
+        const result = await uploadBytes(locationRef, file);
+        const downloadUrl = await getDownloadURL(result.ref);
+        await updateDoc(docRef, { downloadUrl });
+      }
     } catch (e) {
       console.log(e);
     } finally {
@@ -66,6 +78,7 @@ const PostTweetForm = () => {
       <S.SubmitButton
         type="submit"
         value={isLoading ? "Posting..." : "Post tweet"}
+        disabled={tweet === "" && !file}
       />
     </S.Form>
   );

@@ -43,8 +43,9 @@ export const AttachFileInput = styled.input`
   display: none;
 `;
 
-export const SubmitButton = styled.input`
-  background-color: ${({ theme }) => theme.colors.light_blue};
+export const SubmitButton = styled.input<{ disabled: boolean }>`
+  background-color: ${({ disabled, theme }) =>
+    disabled ? theme.colors.dark_blue : theme.colors.light_blue};
   color: white;
   padding: 10px 0px;
   border-radius: 20px;
