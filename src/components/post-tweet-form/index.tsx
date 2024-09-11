@@ -54,6 +54,7 @@ const PostTweetForm = () => {
       console.log(e);
     } finally {
       setIsLoading(false);
+      setTweet("");
     }
   };
 
