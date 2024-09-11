@@ -36,7 +36,7 @@ const Timeline = () => {
 
       // NOTE: query에 이벤트 리스너를 등록하여 업데이트된 collection을 실시간으로 가져온다.
       unsubscribe = onSnapshot(tweetsQuery, (snapshot) => {
-        const tweets: TweetDocument[] = snapshot.docs.map((doc) => {
+        const tweetDocuments: TweetDocument[] = snapshot.docs.map((doc) => {
           const { tweet, userId, username, downloadUrl, createdAt } =
             doc.data();
 
@@ -50,7 +50,7 @@ const Timeline = () => {
           };
         });
 
-        setTweets(tweets);
+        setTweets(tweetDocuments);
       });
     };
 

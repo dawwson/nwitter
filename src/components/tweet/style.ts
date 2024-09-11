@@ -25,3 +25,15 @@ export const Payload = styled.p`
   margin: 10px 0px;
   font-size: 18px;
 `;
+
+export const DeleteButton = styled.button`
+  background-color: ${({ theme }) => theme.colors.light_red};
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+  border: 0;
+  border-radius: 5px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+`;

@@ -42,10 +42,7 @@ const PostTweetForm = () => {
       });
 
       if (file) {
-        const locationRef = ref(
-          storage,
-          `tweets/${user.uid}-${user.displayName}/${docRef.id}`
-        );
+        const locationRef = ref(storage, `tweets/${user.uid}/${docRef.id}`);
         const result = await uploadBytes(locationRef, file);
         const downloadUrl = await getDownloadURL(result.ref);
         await updateDoc(docRef, { downloadUrl });
