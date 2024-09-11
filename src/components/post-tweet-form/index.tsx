@@ -55,6 +55,7 @@ const PostTweetForm = () => {
     } finally {
       setIsLoading(false);
       setTweet("");
+      setFile(null);
     }
   };
 
